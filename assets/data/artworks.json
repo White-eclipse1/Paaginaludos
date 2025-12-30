@@ -2,49 +2,73 @@
   {
     "id": "p-001",
     "type": "pintura",
-    "title": "Ventana Azul",
+    "title": "Entre laberintos me encuentras",
     "year": 2025,
     "medium": "Acrílico sobre lienzo",
-    "size": "60 x 80 cm",
+    "size": "100 x 100 cm",
     "price": 8500,
     "available": true,
-    "image": "assets/img/placeholder-1.jpg",
+    "image": "assets/img/Entre laberintos me encuentras.jpeg",
     "description": "Descripción corta de la pieza: inspiración, paleta y proceso."
   },
   {
     "id": "p-002",
     "type": "pintura",
-    "title": "Luz Suave",
-    "year": 2024,
-    "medium": "Óleo sobre papel",
-    "size": "42 x 59 cm",
+    "title": "Pintas mi corazón de colores",
+    "year": 2022,
+    "medium": "acrílico sobre tela",
+    "size": "50 x 50 cm",
     "price": 6200,
     "available": false,
-    "image": "assets/img/placeholder-3.jpg",
+    "image": "assets/img/Pintas mi corazón de colores.jpeg",
     "description": "Pieza vendida. Se puede realizar algo similar por comisión."
   },
   {
     "id": "c-001",
     "type": "ceramica",
-    "title": "Jarrón Orgánico I",
+    "title": "Cruz Jalics",
     "year": 2025,
     "medium": "Cerámica esmaltada",
     "size": "28 cm alto",
     "price": 3200,
     "available": false,
-    "image": "assets/img/placeholder-2.jpg",
-    "description": "Cerámica hecha a mano, esmalte brillante, pieza única."
+    "image": "assets/img/Cruz Jalics.jpeg",
+    "description": "Cruz inspirada en la cruz que tenía a un costado de su cama en Gries mi maestro Franz Jalics SJ. Crearla me remonta a su sencillez de corazón y su grandeza de alma."
   },
   {
     "id": "c-002",
     "type": "ceramica",
-    "title": "Taza Texturada",
+    "title": "Mascaradas",
     "year": 2025,
     "medium": "Cerámica de alta temperatura",
-    "size": "350 ml",
+    "size": "8 cm alto",
     "price": 980,
     "available": true,
-    "image": "assets/img/placeholder-2.jpg",
-    "description": "Taza utilitaria con textura, ideal para café o té."
+    "image": "assets/img/caras.jpeg",
+    "description": "Colgantes que simulan el baile de máscaras de las culturas actuales y ancestrales. No hacen referencia a nadie en específico. Son personajes que pueden ser encontrados en la ficción o en la realidad."
+  },
+  {
+    "id": "p-003",
+    "type": "pintura",
+    "title": "Reflejos de mi alma",
+    "year": 2025,
+    "medium": "Acrílico",
+    "size": "80 x 60 cm",
+    "price": 7500,
+    "available": true,
+    "image": "assets/img/Reflejos de mi alma.jpeg",
+    "description": "Descripción corta de la pieza: inspiración, paleta y proceso."
+  },
+  {
+    "id": "c-003",
+    "type": "ceramica",
+    "title": "Charola portatiliches buró",
+    "year": 2025,
+    "medium": "Cerámica de alta temperatura",
+    "size": "10 x 30 cm",
+    "price": 200,
+    "available": true,
+    "image": "assets/img/Charola portatiliches buró.jpeg",
+    "description": "Charola portatiliches para el buró"
   }
 ]
