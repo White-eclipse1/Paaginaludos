@@ -1,0 +1,50 @@
+[
+  {
+    "id": "p-001",
+    "type": "pintura",
+    "title": "Ventana Azul",
+    "year": 2025,
+    "medium": "Acrílico sobre lienzo",
+    "size": "60 x 80 cm",
+    "price": 8500,
+    "available": true,
+    "image": "assets/img/placeholder-1.jpg",
+    "description": "Descripción corta de la pieza: inspiración, paleta y proceso."
+  },
+  {
+    "id": "p-002",
+    "type": "pintura",
+    "title": "Luz Suave",
+    "year": 2024,
+    "medium": "Óleo sobre papel",
+    "size": "42 x 59 cm",
+    "price": 6200,
+    "available": false,
+    "image": "assets/img/placeholder-3.jpg",
+    "description": "Pieza vendida. Se puede realizar algo similar por comisión."
+  },
+  {
+    "id": "c-001",
+    "type": "ceramica",
+    "title": "Jarrón Orgánico I",
+    "year": 2025,
+    "medium": "Cerámica esmaltada",
+    "size": "28 cm alto",
+    "price": 3200,
+    "available": false,
+    "image": "assets/img/placeholder-2.jpg",
+    "description": "Cerámica hecha a mano, esmalte brillante, pieza única."
+  },
+  {
+    "id": "c-002",
+    "type": "ceramica",
+    "title": "Taza Texturada",
+    "year": 2025,
+    "medium": "Cerámica de alta temperatura",
+    "size": "350 ml",
+    "price": 980,
+    "available": true,
+    "image": "assets/img/placeholder-2.jpg",
+    "description": "Taza utilitaria con textura, ideal para café o té."
+  }
+]

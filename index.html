@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lulú Cárdenas — Arte delulu</title>
+  <meta name="description" content="Portafolio de pinturas y cerámicas. Obras disponibles y comisiones." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html" aria-label="Inicio">
+        <span class="brand__name">Lulú Cárdenas</span>
+        <span class="brand__sub">Pintura + Cerámica</span>
+      </a>
+
+      <button class="nav__toggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="sr-only">Abrir menú</span>
+        ☰
+      </button>
+
+      <nav id="navMenu" class="nav" aria-label="Navegación principal">
+        <a href="gallery.html?type=pintura">Pinturas</a>
+        <a href="gallery.html?type=ceramica">Cerámicas</a>
+        <a href="#about">Acerca</a>
+        <a href="#contacto">Contact Us</a>
+
+        <a class="ig-pill" href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">
+          Instagram ↗
+        </a>
+        <a class="ig-pill" href="https://linktr.ee/lulucardenas?utm_source=linktree_profile_share&ltsid=c105b71a-f330-43ba-a84f-3cb85dae8ddf"
+           target="_blank" rel="noreferrer">
+          Linktree ↗
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <h1>Obras originales en pintura y cerámica.</h1>
+          <p class="lead">
+            Portafolio minimalista para mostrar piezas, colecciones y disponibilidad.
+          </p>
+
+          <div class="cta">
+            <a class="btn" href="gallery.html?type=pintura">Explorar Pinturas</a>
+            <a class="btn btn--ghost" href="gallery.html?type=ceramica">Explorar Cerámicas</a>
+          </div>
+
+          <div class="meta">
+            <span>📍 México</span>
+            <span>•</span>
+            <span>Comisiones abiertas: Sí/No</span>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <figure class="media">
+            <img src="assets/img/placeholder-1.jpg" alt="Obra destacada de Lulú Cárdenas" />
+          </figure>
+          <figure class="media media--stack">
+            <img src="assets/img/placeholder-2.jpg" alt="Detalle de cerámica" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container two-col">
+        <div>
+          <h2>Statement</h2>
+          <p>
+            Escribe aquí un párrafo corto sobre tu obra: temas, inspiración, materiales y proceso.
+          </p>
+          <p>
+            Puedes agregar otra idea: cómo conviven la pintura y la cerámica en tu práctica artística.
+          </p>
+
+          <div class="chips">
+            <span class="chip">Obras originales</span>
+            <span class="chip">Piezas únicas</span>
+            <span class="chip">Envíos / Pickup</span>
+          </div>
+        </div>
+
+        <figure class="about__img">
+          <img src="assets/img/placeholder-3.jpg" alt="Foto en el estudio" />
+          <figcaption>Foto en estudio (opcional)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- FEATURED -->
+    <section class="section section--muted">
+      <div class="container">
+        <div class="section__head">
+          <h2>Destacados</h2>
+          <a class="link" href="gallery.html">Ver todo →</a>
+        </div>
+
+        <div id="featuredGrid" class="grid"></div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER (opcional) -->
+    <section class="section">
+      <div class="container newsletter">
+        <h2>Mantente al tanto</h2>
+        <p>Recibe noticias de nuevas piezas, drops y exposiciones.</p>
+
+        <form class="form" onsubmit="return false">
+          <label class="sr-only" for="email">Email</label>
+          <input id="email" type="email" placeholder="tu@email.com" autocomplete="email" />
+          <button class="btn" type="submit">Suscribirme</button>
+        </form>
+
+        <small class="fineprint">Conéctalo después con Mailchimp / ConvertKit si quieres.</small>
+      </div>
+    </section>
+
+    <!-- CONTACT US -->
+    <section id="contacto" class="section section--muted">
+      <div class="container two-col">
+        <div>
+          <h2>Contact Us</h2>
+          <p class="lead">Para compras, comisiones o colaboraciones, mándame un mensaje.</p>
+
+          <ul class="contact">
+            <li><strong>Email:</strong> <a href="mailto:artista@correo.com">artista@correo.com</a></li>
+            <li><strong>Instagram:</strong> <a href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">@artedelulu</a></li>
+            <li><strong>Links:</strong> <a href="https://linktr.ee/lulucardenas?utm_source=linktree_profile_share&ltsid=c105b71a-f330-43ba-a84f-3cb85dae8ddf" target="_blank" rel="noreferrer">Linktree ↗</a></li>
+          </ul>
+
+          <div class="cta" style="margin-top:14px">
+            <a class="btn" href="mailto:artista@correo.com?subject=Consulta%20de%20obra">Email</a>
+            <a class="btn btn--ghost" href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">DM en Instagram</a>
+          </div>
+
+          <small class="fineprint">
+            Este formulario abre tu app de correo (mailto). Si quieres backend, luego lo conectas.
+          </small>
+        </div>
+
+        <div class="card">
+          <h3>Send a message</h3>
+
+          <form id="contactForm">
+            <label class="sr-only" for="name">Nombre</label>
+            <input id="name" name="name" type="text" placeholder="Nombre" required />
+
+            <label class="sr-only" for="emailC">Email</label>
+            <input id="emailC" name="email" type="email" placeholder="Email" required />
+
+            <label class="sr-only" for="msg">Mensaje</label>
+            <textarea id="msg" name="message" placeholder="Cuéntame qué pieza te interesa…" rows="5" required></textarea>
+
+            <button class="btn" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <small>© <span id="year"></span> Lulú Cárdenas</small>
+      <div class="footer__links">
+        <a href="gallery.html?type=pintura">Pinturas</a>
+        <a href="gallery.html?type=ceramica">Cerámicas</a>
+        <a href="#contacto">Contact Us</a>
+        <a href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">Instagram ↗</a>
+        <a href="https://linktr.ee/lulucardenas?utm_source=linktree_profile_share&ltsid=c105b71a-f330-43ba-a84f-3cb85dae8ddf" target="_blank" rel="noreferrer">Linktree ↗</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante móvil -->
+  <a class="ig-float" href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">
+    DM Instagram
+  </a>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
