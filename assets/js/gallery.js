@@ -85,7 +85,7 @@ function statusPill(item){
   return `<span class="status-pill ${isAvail ? "available" : "sold"}">${isAvail ? " Disponible" : " Vendida"}</span>`;
 }
 
-function cardHTML(item){
+function cardHTML(item) {
   const subtitle = [
     item.year ? String(item.year) : "",
     item.medium || "",
@@ -95,6 +95,11 @@ function cardHTML(item){
   const price = safePrice(item);
   const description = (item.description || "").trim();
   const typeIcon = item.type === "pintura" ? "" : "";
+
+  // Definimos el aviso según el tipo de obra
+  const shippingNotice = item.type === "pintura" 
+    ? "Nota: Esta obra se entrega sin marco para facilitar su envío y permitir que elijas el que mejor combine con tu espacio." 
+    : "Nota: La pieza de cerámica no incluye los accesorios (anillos o decoración) mostrados en las fotografías.";
 
   return `
     <article class="art-card" data-id="${item.id}">
@@ -170,14 +175,20 @@ function cardHTML(item){
               </div>
             ` : ""}
 
+            <div class="panel-notice" style="margin: 16px 0; padding: 14px; background: var(--primary-soft); border-radius: 12px; border: 1px solid rgba(200, 16, 46, 0.1); display: flex; gap: 12px; align-items: center;">
+              <span style="font-size: 20px;">⚠️</span>
+              <p style="margin: 0; font-size: 13px; color: var(--primary-dark); font-weight: 500; line-height: 1.4;">
+                ${shippingNotice}
+              </p>
+            </div>
+
             <div class="panel-actions">
               <a class="btn btn--large" href="${SETTINGS.contactUrl}">
                  Preguntar por esta pieza
               </a>
-              
             </div>
 
-            <small class="fineprint">
+            <small class="fineprint" style="display: block; margin-top: 12px; color: var(--muted); font-size: 12px;">
                Escríbenos por Instagram o email para más información sobre esta obra.
             </small>
           </div>
@@ -498,3 +509,54 @@ function observeCards(){
 
   cards.forEach(c => io.observe(c));
 }
+let lastScroll = 0;
+const header = document.querySelector(".header");
+const threshold = 10; // Cantidad de pixeles de tolerancia
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.pageYOffset;
+
+  // Si el scroll es menor a 0 (rebote en iOS) no hace nada
+  if (currentScroll <= 0) {
+    header.style.transform = "translateY(0)";
+    return;
+  }
+
+  // Si el movimiento es muy pequeño, lo ignoramos para mayor suavidad
+  if (Math.abs(currentScroll - lastScroll) < threshold) return;
+
+  if (currentScroll > lastScroll && currentScroll > 150) {
+    // Bajando: Escondemos el header
+    header.style.transform = "translateY(-100%)";
+  } else {
+    // Subiendo: Mostramos el header
+    header.style.transform = "translateY(0)";
+  }
+
+  lastScroll = currentScroll;
+}, { passive: true }); // Mejora el rendimiento del scroll
+// Efecto de Zoom Interactivo que sigue al puntero
+document.addEventListener("mousemove", (e) => {
+  const wrapper = e.target.closest(".panel-image-wrapper");
+  if (!wrapper) return;
+
+  const img = wrapper.querySelector(".panel-img");
+  if (!img) return;
+
+  // Calculamos la posición del mouse relativa al contenedor
+  const rect = wrapper.getBoundingClientRect();
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+  // Ajustamos el origen de la transformación dinámicamente
+  img.style.transformOrigin = `${x}% ${y}%`;
+});
+
+// Resetear el origen al salir para que regrese al centro suavemente
+document.addEventListener("mouseout", (e) => {
+  const wrapper = e.target.closest(".panel-image-wrapper");
+  if (!wrapper) return;
+
+  const img = wrapper.querySelector(".panel-img");
+  if (img) img.style.transformOrigin = "center center";
+});

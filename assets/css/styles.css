@@ -72,6 +72,8 @@ small{color:var(--muted);font-size:13px}
   background:rgba(255,251,247,.95);
   backdrop-filter: blur(12px);
   border-bottom:1px solid var(--line);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 .header__inner{display:flex;align-items:center;justify-content:space-between;min-height:70px;gap:12px}
 
@@ -1246,4 +1248,38 @@ textarea{
 .art-card:hover .art-thumb {
   filter: grayscale(0%);
   transform: scale(1.02);
+}
+.panel-notice {
+  border: 1px solid rgba(200, 16, 46, 0.1);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Contenedor de la imagen en el panel */
+.panel-image-wrapper {
+  position: relative;
+  overflow: hidden; /* Corta el exceso de la imagen al crecer */
+  background: var(--soft);
+  padding: 0; /* Quitamos el padding para que la imagen toque los bordes */
+  border-radius: 18px;
+  cursor: zoom-in;
+}
+
+/* La imagen propiamente */
+.panel-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center center;
+}
+
+/* Estado al hacer hover (Desktop) */
+@media (hover: hover) {
+  .panel-image-wrapper:hover .panel-img {
+    transform: scale(1.5); /* Nivel de zoom */
+  }
 }
