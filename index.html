@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" href="assets/img/caras.jpeg">
 
 </head>
+<div class="nav__backdrop" id="navBackdrop" hidden></div>
 
 <body>
   <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -26,17 +27,19 @@
       </button>
 
       <nav id="navMenu" class="nav" aria-label="Navegación principal">
+        <button class="nav__close" type="button" aria-label="Cerrar menú">✕</button>
+
         <a href="gallery.html?type=pintura">Pinturas</a>
         <a href="gallery.html?type=ceramica">Cerámicas</a>
         <a href="#about">Acerca</a>
         <a href="#contacto">Contacto</a>
 
         <a class="ig-pill" href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">
-          Instagram ↗
+          Instagram 
         </a>
         <a class="ig-pill" href="https://linktr.ee/lulucardenas?utm_source=linktree_profile_share&ltsid=c105b71a-f330-43ba-a84f-3cb85dae8ddf"
            target="_blank" rel="noreferrer">
-          Linktree ↗
+          Linktree 
         </a>
       </nav>
     </div>
@@ -58,7 +61,7 @@
           </div>
 
           <div class="meta">
-            <span>📍 Zapopan, México</span>
+            <span>Zapopan, México</span>
             <span>•</span>
             <span> Comisiones abiertas</span>
           </div>
@@ -115,10 +118,10 @@
           </p>
 
           <div class="chips">
-            <span class="chip">🎨 Obras originales</span>
-            <span class="chip">✋ Piezas únicas</span>
-            <span class="chip">📦 Envíos nacionales</span>
-            <span class="chip">🤝 Comisiones personalizadas</span>
+            <span class="chip">Obras originales</span>
+            <span class="chip">Piezas únicas</span>
+            <span class="chip">Envíos nacionales</span>
+            <span class="chip">Comisiones personalizadas</span>
           </div>
 
           <div class="cta" style="margin-top: 24px;">
@@ -241,30 +244,7 @@
       </div>
     </section>
 
-    <!-- NEWSLETTER -->
-    <section class="section">
-      <div class="container">
-        <div class="newsletter-box">
-          <div class="newsletter-content">
-            <h2>Mantente al tanto</h2>
-            <p>Suscríbete para recibir noticias sobre nuevas piezas, colecciones y exposiciones.</p>
-
-            <form class="form" onsubmit="return false">
-              <div class="form-group">
-                <label class="sr-only" for="email">Email</label>
-                <input id="email" type="email" placeholder="tu@email.com" autocomplete="email" />
-                <button class="btn" type="submit">Suscribirme</button>
-              </div>
-            </form>
-
-            <small class="fineprint">🔒 Tu privacidad es importante. No spam, solo arte.</small>
-          </div>
-          <div class="newsletter-visual">
-            <div class="newsletter-icon">✉️</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <!-- CONTACT -->
     <section id="contacto" class="section section--dark">
@@ -365,7 +345,7 @@
 
   <!-- Botón flotante móvil -->
   <a class="ig-float" href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">
-    💬 DM Instagram
+     DM Instagram
   </a>
 
   <script src="assets/js/app.js"></script>

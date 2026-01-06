@@ -8,12 +8,48 @@ const SETTINGS = {
 // Menú mobile + año footer
 const toggle = document.querySelector(".nav__toggle");
 const nav = document.querySelector("#navMenu");
+const backdrop = document.querySelector("#navBackdrop");
+const closeBtn = nav?.querySelector(".nav__close");
+
+function openNav(){
+  if (!nav) return;
+  nav.classList.add("is-open");
+  backdrop?.classList.add("is-open");
+  document.body.classList.add("nav-open");
+  toggle?.setAttribute("aria-expanded", "true");
+  if (backdrop) backdrop.hidden = false;
+}
+
+function closeNav(){
+  if (!nav) return;
+  nav.classList.remove("is-open");
+  backdrop?.classList.remove("is-open");
+  document.body.classList.remove("nav-open");
+  toggle?.setAttribute("aria-expanded", "false");
+  if (backdrop) backdrop.hidden = true;
+}
+
 if (toggle && nav) {
   toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", String(open));
+    const isOpen = nav.classList.contains("is-open");
+    isOpen ? closeNav() : openNav();
   });
 }
+
+backdrop?.addEventListener("click", closeNav);
+closeBtn?.addEventListener("click", closeNav);
+
+// cerrar con ESC
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && nav?.classList.contains("is-open")) closeNav();
+});
+
+// cerrar al tocar un link
+nav?.addEventListener("click", (e) => {
+  const a = e.target.closest("a");
+  if (a) closeNav();
+});
+
 
 const yearEl = document.querySelector("#year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();

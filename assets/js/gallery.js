@@ -35,7 +35,7 @@ function showLoading() {
   if (!grid) return;
   grid.innerHTML = `
     <div class="card" style="text-align:center; padding:40px;">
-      <div style="font-size:48px; margin-bottom:16px;">🎨</div>
+      <div style="font-size:48px; margin-bottom:16px;"></div>
       <p class="lead">Cargando galería...</p>
     </div>
   `;
@@ -94,7 +94,7 @@ function cardHTML(item){
 
   const price = safePrice(item);
   const description = (item.description || "").trim();
-  const typeIcon = item.type === "pintura" ? "🖼️" : "🏺";
+  const typeIcon = item.type === "pintura" ? "" : "";
 
   return `
     <article class="art-card" data-id="${item.id}">
@@ -132,33 +132,33 @@ function cardHTML(item){
 
             <div class="panel-details">
               <div class="detail-row">
-                <span class="detail-label">📁 Tipo</span>
+                <span class="detail-label"> Tipo</span>
                 <span class="detail-value">${item.type === "pintura" ? "Pintura" : "Cerámica"}</span>
               </div>
               
               ${item.year ? `
                 <div class="detail-row">
-                  <span class="detail-label">📅 Año</span>
+                  <span class="detail-label"> Año</span>
                   <span class="detail-value">${item.year}</span>
                 </div>
               ` : ''}
               
               ${item.medium ? `
                 <div class="detail-row">
-                  <span class="detail-label">🎨 Técnica</span>
+                  <span class="detail-label"> Técnica</span>
                   <span class="detail-value">${item.medium}</span>
                 </div>
               ` : ''}
               
               ${item.size ? `
                 <div class="detail-row">
-                  <span class="detail-label">📏 Dimensiones</span>
+                  <span class="detail-label"> Dimensiones</span>
                   <span class="detail-value">${item.size}</span>
                 </div>
               ` : ''}
               
               <div class="detail-row detail-row--highlight">
-                <span class="detail-label">💰 Precio</span>
+                <span class="detail-label"> Precio</span>
                 <span class="detail-value" style="font-weight:700; font-size:18px;">${price}</span>
               </div>
             </div>
@@ -172,15 +172,13 @@ function cardHTML(item){
 
             <div class="panel-actions">
               <a class="btn btn--large" href="${SETTINGS.contactUrl}">
-                💬 Preguntar por esta pieza
+                 Preguntar por esta pieza
               </a>
-              <a class="btn btn--ghost" href="${SETTINGS.contactUrl}">
-                📧 Ir a Contacto
-              </a>
+              
             </div>
 
             <small class="fineprint">
-              💡 Escríbenos por WhatsApp, Instagram o email para más información sobre esta obra.
+               Escríbenos por Instagram o email para más información sobre esta obra.
             </small>
           </div>
         </div>
@@ -241,6 +239,10 @@ function render(){
     grid.innerHTML = items.map(cardHTML).join("");
     grid.style.display = "grid";
     if (emptyState) emptyState.style.display = "none";
+    
+    
+    setTimeout(observeCards, 50); 
+    
   } else {
     grid.style.display = "none";
     if (emptyState) emptyState.style.display = "flex";
@@ -359,3 +361,140 @@ resetBtn?.addEventListener("click", resetFilters);
     showError(`No se pudo cargar la galería: ${err.message}`);
   }
 })();
+// ===== Swipe left/right para cambiar tabs =====
+(function enableSwipeTabs(){
+  const swipeArea = document.querySelector(".filters-section") || document.querySelector("#grid");
+  if (!swipeArea || !tabs?.length) return;
+
+  const order = ["all", "pintura", "ceramica", "disponible"];
+  let startX = 0, startY = 0, tracking = false;
+
+  function idxOfFilter(f){ return Math.max(0, order.indexOf(f)); }
+
+  swipeArea.addEventListener("touchstart", (e) => {
+    if (!e.touches || e.touches.length !== 1) return;
+
+    // evita swipes cuando estás interactuando con input/select
+    const t = e.target;
+    if (t.closest("input, textarea, select, button")) return;
+
+    tracking = true;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+
+  swipeArea.addEventListener("touchend", (e) => {
+    if (!tracking) return;
+    tracking = false;
+
+    const touch = e.changedTouches?.[0];
+    if (!touch) return;
+
+    const dx = touch.clientX - startX;
+    const dy = touch.clientY - startY;
+
+    // si es más vertical que horizontal, ignora
+    if (Math.abs(dy) > Math.abs(dx)) return;
+
+    const threshold = 55; // sensibilidad
+    if (Math.abs(dx) < threshold) return;
+
+    let i = idxOfFilter(filter);
+    if (dx < 0) i = Math.min(order.length - 1, i + 1); // swipe left -> siguiente
+    else i = Math.max(0, i - 1); // swipe right -> anterior
+
+    filter = order[i];
+    render();
+
+    // feedback ligero (haptics no disponible web, pero un micro highlight sí)
+    const activeTab = Array.from(tabs).find(t => t.dataset.filter === filter);
+    activeTab?.scrollIntoView?.({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, { passive: true });
+})();
+// ===== Gestos: swipe up para cerrar / swipe L/R para navegar en modo "open" =====
+(function enableCardGestures(){
+  const root = document.querySelector("#grid");
+  if (!root) return;
+
+  let sx=0, sy=0, cardId=null, tracking=false;
+
+  function openedCards(){
+    return Array.from(document.querySelectorAll(".art-card"));
+  }
+  function openByIndex(nextIndex){
+    const cards = openedCards();
+    const clamped = Math.max(0, Math.min(cards.length - 1, nextIndex));
+    const card = cards[clamped];
+    if (!card) return;
+    closeAllExcept(card.dataset.id);
+    openCard(card);
+  }
+  function currentOpenIndex(){
+    const cards = openedCards();
+    const open = cards.findIndex(c => c.classList.contains("is-open"));
+    return open;
+  }
+
+  root.addEventListener("touchstart", (e) => {
+    if (e.touches?.length !== 1) return;
+    const targetCard = e.target.closest(".art-card");
+    if (!targetCard) return;
+
+    // no gestos si tocan controles
+    if (e.target.closest("a, button, input, textarea, select")) return;
+
+    tracking = true;
+    cardId = targetCard.dataset.id;
+    sx = e.touches[0].clientX;
+    sy = e.touches[0].clientY;
+  }, { passive: true });
+
+  root.addEventListener("touchend", (e) => {
+    if (!tracking) return;
+    tracking = false;
+
+    const t = e.changedTouches?.[0];
+    if (!t) return;
+
+    const dx = t.clientX - sx;
+    const dy = t.clientY - sy;
+
+    const absX = Math.abs(dx);
+    const absY = Math.abs(dy);
+
+    // Solo actuar si hay una tarjeta abierta
+    const openIdx = currentOpenIndex();
+    if (openIdx === -1) return;
+
+    // swipe up (cerrar)
+    if (absY > absX && dy < -70) {
+      const openCardEl = openedCards()[openIdx];
+      if (openCardEl) closeCard(openCardEl);
+      return;
+    }
+
+    // swipe left/right (navegar)
+    if (absX > absY && absX > 70) {
+      if (dx < 0) openByIndex(openIdx + 1); // siguiente
+      else openByIndex(openIdx - 1); // anterior
+    }
+  }, { passive: true });
+})();
+// ===== Reveal on scroll =====
+function observeCards(){
+  const cards = document.querySelectorAll(".art-card:not(.is-visible)");
+  
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting){
+        
+        setTimeout(() => {
+          entry.target.classList.add("is-visible");
+        }, index * 100); 
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(c => io.observe(c));
+}
