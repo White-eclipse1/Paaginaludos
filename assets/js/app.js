@@ -86,6 +86,78 @@ function featuredCardHTML(item) {
 }
 loadFeatured();
 
+async function loadHeroCarousel() {
+  const track = document.querySelector("#heroCarouselTrack");
+  const prevBtn = document.querySelector("#heroPrev");
+  const nextBtn = document.querySelector("#heroNext");
+  const dotsWrap = document.querySelector("#heroDots");
+  if (!track || !prevBtn || !nextBtn || !dotsWrap) return;
+
+  try {
+    const res = await fetch("assets/data/artworks.json");
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) return;
+
+    const items = data.slice(0, 6);
+    let current = 0;
+    let timer = null;
+
+    track.innerHTML = items.map((item, index) => `
+      <article class="hero-carousel__slide ${index === 0 ? "is-active" : ""}" data-slide="${index}">
+        <img src="${item.image}" alt="${item.title}" loading="${index === 0 ? "eager" : "lazy"}" />
+        <div class="hero-carousel__caption">
+          <strong>${item.title}</strong>
+          <span>${item.type === "ceramica" ? "Cerámica" : "Pintura"}${item.year ? ` · ${item.year}` : ""}</span>
+        </div>
+      </article>
+    `).join("");
+
+    dotsWrap.innerHTML = items.map((_, index) => `
+      <button class="hero-carousel__dot ${index === 0 ? "is-active" : ""}" type="button" data-dot="${index}" aria-label="Ir a obra ${index + 1}"></button>
+    `).join("");
+
+    const slides = Array.from(track.querySelectorAll(".hero-carousel__slide"));
+    const dots = Array.from(dotsWrap.querySelectorAll(".hero-carousel__dot"));
+
+    function showSlide(index) {
+      current = (index + slides.length) % slides.length;
+      slides.forEach((slide, i) => slide.classList.toggle("is-active", i === current));
+      dots.forEach((dot, i) => dot.classList.toggle("is-active", i === current));
+    }
+
+    function next() { showSlide(current + 1); }
+    function prev() { showSlide(current - 1); }
+
+    function startAuto() {
+      stopAuto();
+      timer = setInterval(next, 4200);
+    }
+    function stopAuto() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    prevBtn.addEventListener("click", () => { prev(); startAuto(); });
+    nextBtn.addEventListener("click", () => { next(); startAuto(); });
+    dotsWrap.addEventListener("click", (e) => {
+      const dot = e.target.closest("[data-dot]");
+      if (!dot) return;
+      showSlide(Number(dot.dataset.dot));
+      startAuto();
+    });
+
+    track.addEventListener("mouseenter", stopAuto);
+    track.addEventListener("mouseleave", startAuto);
+    track.addEventListener("touchstart", stopAuto, { passive: true });
+    track.addEventListener("touchend", startAuto, { passive: true });
+
+    startAuto();
+  } catch (_) {
+    // Si falla la carga, el hero mantiene estructura sin carrusel.
+  }
+}
+loadHeroCarousel();
+
 // Contact form (mailto)
 const contactForm = document.querySelector("#contactForm");
 if (contactForm) {

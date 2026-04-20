@@ -28,9 +28,14 @@
 
       <nav id="navMenu" class="nav" aria-label="Navegación principal">
         <button class="nav__close" type="button" aria-label="Cerrar menú">✕</button>
-
-        <a href="gallery.html?type=pintura">Pinturas</a>
-        <a href="gallery.html?type=ceramica">Cerámicas</a>
+        <details class="nav__dropdown">
+          <summary class="nav__link">Galería</summary>
+          <div class="nav__dropdown-menu">
+            <a href="gallery.html">Ver todo</a>
+            <a href="gallery.html?type=pintura">Pinturas</a>
+            <a href="gallery.html?type=ceramica">Cerámicas</a>
+          </div>
+        </details>
         <a href="#about">Acerca</a>
         <a href="#contacto">Contacto</a>
 
@@ -68,12 +73,12 @@
         </div>
 
         <div class="hero__media">
-          <figure class="media">
-            <img src="assets/img/Pintas mi corazón de colores.jpeg" alt="Obra destacada de Lulú Cárdenas" />
-          </figure>
-          <figure class="media media--stack">
-            <img src="assets/img/Cruz Jalics.jpeg" alt="Detalle de cerámica" />
-          </figure>
+          <section class="hero-carousel" aria-label="Carrusel de obras destacadas">
+            <div id="heroCarouselTrack" class="hero-carousel__track" aria-live="polite"></div>
+            <button class="hero-carousel__btn hero-carousel__btn--prev" id="heroPrev" type="button" aria-label="Obra anterior">‹</button>
+            <button class="hero-carousel__btn hero-carousel__btn--next" id="heroNext" type="button" aria-label="Siguiente obra">›</button>
+            <div class="hero-carousel__dots" id="heroDots" aria-label="Seleccionar obra"></div>
+          </section>
         </div>
       </div>
     </section>
@@ -104,8 +109,8 @@
 
     <!-- ABOUT -->
     <section id="about" class="section">
-      <div class="container two-col">
-        <div>
+      <div class="container about-rework">
+        <div class="about-rework__intro">
           <div class="section-badge">Acerca de mi obra</div>
           <h2>Creando desde el corazón</h2>
           <p>
@@ -116,27 +121,32 @@
           <p>
             Transformo con mis manos la arcilla, dejando un poco de mi alma, para convertirla en objetos útiles o adornos llenos de vida e historia propia.
           </p>
+        </div>
 
-          <div class="chips">
-            <span class="chip">Obras originales</span>
-            <span class="chip">Piezas únicas</span>
-            <span class="chip">Envíos nacionales</span>
-            <span class="chip">Comisiones personalizadas</span>
+        <div class="about-rework__grid" aria-label="Valores de la obra">
+          <div class="about-rework__card">
+            <h3>Obra original</h3>
+            <p>Cada pieza es única y creada a mano, sin reproducciones.</p>
           </div>
-
-          <div class="cta" style="margin-top: 24px;">
-            <a class="btn" href="gallery.html">Ver Portfolio Completo</a>
+          <div class="about-rework__card">
+            <h3>Técnica mixta</h3>
+            <p>Pintura y cerámica se combinan con un proceso sensible y personal.</p>
+          </div>
+          <div class="about-rework__card">
+            <h3>Comisiones abiertas</h3>
+            <p>Desarrollo piezas personalizadas según tu espacio e intención.</p>
           </div>
         </div>
 
-        <div class="about__image-wrapper">
-          <figure class="about__img">
-            <img src="assets/img/caras.jpeg" alt="Foto en el estudio" />
-          </figure>
-          <div class="about__badge">
-            <span></span>
-            <p>Trabajando en mi estudio en Zapopan</p>
-          </div>
+        <div class="about-rework__chips chips">
+          <span class="chip">Obras originales</span>
+          <span class="chip">Piezas únicas</span>
+          <span class="chip">Envíos nacionales</span>
+          <span class="chip">Comisiones personalizadas</span>
+        </div>
+
+        <div class="about-rework__cta cta">
+          <a class="btn" href="gallery.html">Ver Portfolio Completo</a>
         </div>
       </div>
     </section>

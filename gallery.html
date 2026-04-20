@@ -24,9 +24,14 @@
 
       <nav id="navMenu" class="nav" aria-label="Navegación principal">
         <button class="nav__close" type="button" aria-label="Cerrar menú">✕</button>
-
-        <a href="gallery.html?type=pintura">Pinturas</a>
-        <a href="gallery.html?type=ceramica">Cerámicas</a>
+        <details class="nav__dropdown">
+          <summary class="nav__link">Galería</summary>
+          <div class="nav__dropdown-menu">
+            <a href="gallery.html">Ver todo</a>
+            <a href="gallery.html?type=pintura">Pinturas</a>
+            <a href="gallery.html?type=ceramica">Cerámicas</a>
+          </div>
+        </details>
         <a href="index.html#about">Acerca</a>
         <a href="index.html#contacto">Contacto</a>
         <a class="ig-pill" href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">Instagram</a>
