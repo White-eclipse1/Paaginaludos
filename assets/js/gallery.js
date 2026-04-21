@@ -67,10 +67,10 @@ function showError(msg) {
 
   grid.innerHTML = `
     <div class="card">
-      <h3>Error en Galeria</h3>
+      <h3>Error en la galería</h3>
       <p class="lead">${msg}</p>
       <p style="color: var(--muted); font-size: 14px; margin-top: 12px;">
-        Verifica que el archivo <code>assets/data/artworks.json</code> exista y sea valido.
+        Verifica que el archivo <code>assets/data/artworks.json</code> exista y sea válido.
       </p>
     </div>
   `;
@@ -81,7 +81,7 @@ function showLoading() {
 
   grid.innerHTML = `
     <div class="card" style="text-align:center; padding:40px;">
-      <p class="lead">Cargando galeria...</p>
+      <p class="lead">Cargando galería...</p>
     </div>
   `;
 }
@@ -163,32 +163,32 @@ function getFilterCopy(activeFilter = filter, activeCollection = collectionFilte
 
   if (activeFilter === "pintura") {
     return {
-      badge: "Colecciones de Pintura",
-      title: "Pinturas Originales",
-      desc: "Explora las pinturas organizadas por coleccion para descubrir series completas y piezas relacionadas."
+      badge: "Colecciones de pintura",
+      title: "Pinturas originales",
+      desc: "Explora las pinturas organizadas por colección para descubrir series completas y piezas relacionadas."
     };
   }
 
   if (activeFilter === "ceramica") {
     return {
-      badge: "Colecciones de Ceramica",
-      title: "Ceramicas Artesanales",
-      desc: "Descubre piezas ceramicas unicas hechas a mano y revisa cada obra con sus detalles completos."
+      badge: "Colecciones de cerámica",
+      title: "Cerámicas artesanales",
+      desc: "Descubre piezas cerámicas únicas hechas a mano y revisa cada obra con sus detalles completos."
     };
   }
 
   if (activeFilter === "disponible") {
     return {
       badge: "Obras Disponibles",
-      title: "Obras Listas para Ti",
-      desc: "Estas son las piezas disponibles en este momento, agrupadas por coleccion cuando forman parte de una serie."
+      title: "Obras listas para ti",
+      desc: "Estas son las piezas disponibles en este momento, agrupadas por colección cuando forman parte de una serie."
     };
   }
 
   return {
-    badge: "Explorar Colecciones",
-    title: "Galeria por Colecciones",
-    desc: "Descubre la galeria completa organizada por colecciones para identificar obras que pertenecen a una misma serie."
+    badge: "Explorar colecciones",
+    title: "Galería por colecciones",
+    desc: "Descubre la galería completa organizada por colecciones para identificar obras que pertenecen a una misma serie."
   };
 }
 
@@ -292,10 +292,10 @@ function cardHTML(item) {
 
   const price = safePrice(item);
   const description = (item.description || "").trim();
-  const typeLabel = item.type === "pintura" ? "Pintura" : "Ceramica";
+  const typeLabel = item.type === "pintura" ? "Pintura" : "Cerámica";
   const shippingNotice = item.type === "pintura"
-    ? "Nota: Esta obra se entrega sin marco para facilitar su envio y permitir que elijas el que mejor combine con tu espacio."
-    : "Nota: La pieza de ceramica no incluye los accesorios o decoracion mostrados en las fotografias.";
+    ? "Nota: Esta obra se entrega sin marco para facilitar su envío y permitir que elijas el que mejor combine con tu espacio."
+    : "Nota: La pieza de cerámica no incluye los accesorios o la decoración mostrados en las fotografías.";
 
   return `
     <article class="art-card" data-id="${item.id}">
@@ -349,7 +349,7 @@ function cardHTML(item) {
 
               ${collection ? `
                 <div class="detail-row">
-                  <span class="detail-label">Coleccion</span>
+                  <span class="detail-label">Colección</span>
                   <span class="detail-value">${collection}</span>
                 </div>
               ` : ""}
@@ -363,7 +363,7 @@ function cardHTML(item) {
 
               ${item.medium ? `
                 <div class="detail-row">
-                  <span class="detail-label">Tecnica</span>
+                  <span class="detail-label">Técnica</span>
                   <span class="detail-value">${item.medium}</span>
                 </div>
               ` : ""}
@@ -383,7 +383,7 @@ function cardHTML(item) {
 
             ${description ? `
               <div class="panel-description">
-                <strong>Descripcion</strong>
+                <strong>Descripción</strong>
                 <p>${description}</p>
               </div>
             ` : ""}
@@ -402,7 +402,7 @@ function cardHTML(item) {
             </div>
 
             <small class="fineprint" style="display: block; margin-top: 12px; color: var(--muted); font-size: 12px;">
-              Escribenos por Instagram o email para mas informacion sobre esta obra.
+              Escríbeme por Instagram o correo para más información sobre esta obra.
             </small>
           </div>
         </div>
@@ -462,7 +462,7 @@ function groupItemsByCollection(items) {
         ungrouped = {
           key: "obras-individuales",
           title: "Obras individuales",
-          eyebrow: "Sin coleccion",
+          eyebrow: "Sin colección",
           items: [],
           isUngrouped: true
         };
@@ -476,7 +476,7 @@ function groupItemsByCollection(items) {
       const group = {
         key: `collection-${groups.length + 1}`,
         title: collection,
-        eyebrow: "Coleccion",
+        eyebrow: "Colección",
         items: [],
         isUngrouped: false
       };
@@ -540,7 +540,7 @@ function updateResultsInfo(count, groups) {
   const filterSuffix = filter === "pintura"
     ? " de pintura"
     : filter === "ceramica"
-      ? " de ceramica"
+      ? " de cerámica"
       : filter === "disponible"
         ? " disponibles"
         : "";
@@ -552,7 +552,7 @@ function updateResultsInfo(count, groups) {
 
   const collectionCount = groups.filter((group) => !group.isUngrouped).length;
   const collectionSuffix = collectionCount > 0
-    ? ` en ${collectionCount} ${collectionCount === 1 ? "coleccion" : "colecciones"}`
+    ? ` en ${collectionCount} ${collectionCount === 1 ? "colección" : "colecciones"}`
     : "";
 
   resultsText.textContent = `Mostrando ${count} ${count === 1 ? "obra" : "obras"}${filterSuffix}${collectionSuffix}`;
@@ -736,18 +736,18 @@ resetBtn?.addEventListener("click", resetFilters);
     const data = await getArtworksData();
 
     if (!Array.isArray(data)) {
-      throw new Error("El archivo artworks.json no contiene un array valido");
+      throw new Error("El archivo artworks.json no contiene un arreglo válido");
     }
 
     if (data.length === 0) {
-      throw new Error("El archivo artworks.json esta vacio");
+      throw new Error("El archivo artworks.json está vacío");
     }
 
     all = data;
     updateStats();
     render();
   } catch (error) {
-    showError(`No se pudo cargar la galeria: ${error.message}`);
+    showError(`No se pudo cargar la galería: ${error.message}`);
   }
 })();
 

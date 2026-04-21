@@ -270,8 +270,8 @@ if (contactForm) {
     const email = document.querySelector("#emailC")?.value?.trim() || "";
     const message = document.querySelector("#msg")?.value?.trim() || "";
 
-    const subject = encodeURIComponent(`Contact Us — ${name}`);
-    const body = encodeURIComponent(`Nombre: ${name}\nEmail: ${email}\n\nMensaje:\n${message}`);
+    const subject = encodeURIComponent(`Consulta desde el sitio — ${name}`);
+    const body = encodeURIComponent(`Nombre: ${name}\nCorreo electrónico: ${email}\n\nMensaje:\n${message}`);
 
     window.location.href = `mailto:${SETTINGS.email}?subject=${subject}&body=${body}`;
   });
