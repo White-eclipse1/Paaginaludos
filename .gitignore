@@ -1,3 +1,10 @@
 modulos/terraform.tfvars
 modulos/.terraform/
 modulos/.terraform.lock.hcl
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
