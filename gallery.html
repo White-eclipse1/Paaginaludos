@@ -6,6 +6,8 @@
   <title>Galería — Lulú Cárdenas</title>
   <meta name="description" content="Galería de pinturas y cerámicas originales." />
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" type="image/png" href="assets/img/arte de lulu1.PNG">
+
 </head>
 
 <body>
@@ -14,29 +16,44 @@
   <header class="header">
     <div class="container header__inner">
       <a class="brand" href="index.html" aria-label="Inicio">
-        <span class="brand__name">Lulú Cárdenas</span>
-        <span class="brand__sub">Pintura + Cerámica</span>
+        <span class="brand__mark" aria-hidden="true">
+          <img src="assets/img/WhatsApp Image 2026-02-16 at 5.12.09 PM.jpeg" alt="" />
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">Lulú Cárdenas</span>
+          <span class="brand__sub">Pintura + Cerámica</span>
+        </span>
       </a>
-
-      <button class="nav__toggle" aria-expanded="false" aria-controls="navMenu">
-        <span class="sr-only">Abrir menú</span> ☰
-      </button>
 
       <nav id="navMenu" class="nav" aria-label="Navegación principal">
         <button class="nav__close" type="button" aria-label="Cerrar menú">✕</button>
-        <details class="nav__dropdown">
-          <summary class="nav__link">Galería</summary>
-          <div class="nav__dropdown-menu">
-            <a href="gallery.html">Ver todo</a>
-            <a href="gallery.html?type=pintura">Pinturas</a>
-            <a href="gallery.html?type=ceramica">Cerámicas</a>
-          </div>
-        </details>
-        <a href="index.html#about">Acerca</a>
-        <a href="index.html#contacto">Contacto</a>
-        <a class="ig-pill" href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">Instagram</a>
-        <a class="ig-pill" href="https://linktr.ee/lulucardenas?utm_source=linktree_profile_share&ltsid=c105b71a-f330-43ba-a84f-3cb85dae8ddf" target="_blank" rel="noreferrer">Linktree</a>
+        <p class="nav__eyebrow">Explora el estudio</p>
+        <div class="nav__primary">
+          <details class="nav__dropdown">
+            <summary class="nav__link">Galería</summary>
+            <div class="nav__dropdown-menu">
+              <a href="gallery.html">Ver todo</a>
+              <a href="gallery.html?type=pintura">Pinturas</a>
+              <a href="gallery.html?type=ceramica">Cerámicas</a>
+            </div>
+          </details>
+          <a href="index.html#about">Acerca</a>
+          <a href="index.html#contacto">Contacto</a>
+        </div>
+        <div class="nav__actions">
+          <a class="ig-pill ig-pill--solid" href="https://www.instagram.com/artedelulu" target="_blank" rel="noreferrer">Instagram</a>
+          <a class="ig-pill ig-pill--ghost" href="https://linktr.ee/lulucardenas?utm_source=linktree_profile_share&ltsid=c105b71a-f330-43ba-a84f-3cb85dae8ddf" target="_blank" rel="noreferrer">Linktree</a>
+        </div>
       </nav>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navMenu">
+        <span class="sr-only">Abrir menú</span>
+        <span class="nav__toggle-box" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
     </div>
   </header>
   <div class="nav__backdrop" id="navBackdrop" hidden></div>
@@ -98,6 +115,22 @@
           </button>
         </div>
 
+        <div class="collection-filter-bar" id="collectionFiltersWrap" hidden>
+          <div class="collection-filter-bar__head">
+            <div>
+              <p class="collection-filter-bar__eyebrow">Colecciones</p>
+              <p class="collection-filter-bar__hint">
+                Filtra series completas y combina este filtro con tipo, disponibilidad o búsqueda.
+              </p>
+            </div>
+          </div>
+          <div
+            class="collection-filters"
+            id="collectionFilters"
+            aria-label="Filtros por colección"
+          ></div>
+        </div>
+
         <div class="toolbar">
           <div class="search-wrapper">
             
@@ -105,7 +138,7 @@
               id="search" 
               class="search" 
               type="search" 
-              placeholder="Buscar por título, año, técnica..." 
+              placeholder="Buscar por obra, colección, año o técnica..." 
               aria-label="Buscar obras"
             />
           </div>
@@ -179,6 +212,8 @@
   </a>
 
   
+  <script src="assets/data/artworks-data.js"></script>
+  <script src="assets/js/app.js"></script>
   <script src="assets/js/gallery.js"></script>
 </body>
 </html>

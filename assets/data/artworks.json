@@ -98,6 +98,7 @@
     {
         "id":  "p-006",
         "type":  "pintura",
+        "collection":  "Fauna del corazón",
         "title":  "Conejo",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -110,6 +111,7 @@
     {
         "id":  "p-007",
         "type":  "pintura",
+        "collection":  "Fauna del corazón",
         "title":  "Corazón enmielado",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -122,6 +124,7 @@
     {
         "id":  "p-008",
         "type":  "pintura",
+        "collection":  "Fauna del corazón",
         "title":  "Gallo",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -134,6 +137,7 @@
     {
         "id":  "p-009",
         "type":  "pintura",
+        "collection":  "Fauna del corazón",
         "title":  "La ventana de mi corazón",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -146,6 +150,7 @@
     {
         "id":  "p-010",
         "type":  "pintura",
+        "collection":  "Animales en lienzo",
         "title":  "Los amantes patagónicos",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -158,6 +163,7 @@
     {
         "id":  "p-011",
         "type":  "pintura",
+        "collection":  "Animales en lienzo",
         "title":  "Mono",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -170,6 +176,7 @@
     {
         "id":  "p-012",
         "type":  "pintura",
+        "collection":  "Fauna del corazón",
         "title":  "Mosaicos de mi corazón",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -182,6 +189,7 @@
     {
         "id":  "p-013",
         "type":  "pintura",
+        "collection":  "Fauna del corazón",
         "title":  "Pajarito de mi corazón",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -194,6 +202,7 @@
     {
         "id":  "p-014",
         "type":  "pintura",
+        "collection":  "Animales en lienzo",
         "title":  "Perro",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -206,6 +215,7 @@
     {
         "id":  "p-015",
         "type":  "pintura",
+        "collection":  "Fauna del corazón",
         "title":  "Pintas mi corazón de colores",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -230,6 +240,7 @@
     {
         "id":  "p-017",
         "type":  "pintura",
+        "collection":  "Animales en lienzo",
         "title":  "Pollo",
         "year":  2026,
         "medium":  "Acrílico sobre lienzo",
@@ -254,18 +265,19 @@
     {
         "id":  "p-019",
         "type":  "pintura",
-        "title":  "WhatsApp Image 2026-02-16 at 5.12.08 PM (4)",
+        "title":  "Rosas de vida",
         "year":  2025,
         "medium":  "acrílico",
         "size":  "310 x 200 cm",
         "price":  null,
         "available":  true,
-        "image":  "assets/img/WhatsApp Image 2026-02-16 at 5.12.08 PM (4).jpeg",
+        "image":  "assets/img/Rosas de vida.jpeg",
         "description":  "Descripción pendiente de la pieza."
     },
     {
         "id":  "p-020",
         "type":  "pintura",
+        "collection":  "Fauna del corazón",
         "title":  "Pájaros al vuelo",
         "year":  2026,
         "medium":  "Acrílico sobre canvas",

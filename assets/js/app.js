@@ -1,9 +1,42 @@
+(function () {
 // ====== CONFIG (CAMBIA SOLO EL EMAIL) ======
 const SETTINGS = {
   email: "artista@correo.com",
   instagramUrl: "https://www.instagram.com/artedelulu",
-  linktreeUrl: "https://linktr.ee/lulucardenas?utm_source=linktree_profile_share&ltsid=c105b71a-f330-43ba-a84f-3cb85dae8ddf"
+  linktreeUrl: "https://linktr.ee/lulucardenas?utm_source=linktree_profile_share&ltsid=c105b71a-f330-43ba-a84f-3cb85dae8ddf",
+  artworksUrl: "assets/data/artworks.json"
 };
+
+const HOME_HERO_IDS = ["p-008", "p-006", "p-011", "p-014", "p-017", "p-015"];
+const FEATURED_CURATION_IDS = ["p-018", "p-020", "p-013", "p-008", "p-006", "c-002"];
+
+function pickItemsByIds(data, ids) {
+  const byId = new Map(data.map((item) => [item.id, item]));
+  const selected = ids.map((id) => byId.get(id)).filter(Boolean);
+  return selected.length ? selected : data.slice(0, 6);
+}
+
+async function getArtworksData() {
+  const embeddedData = Array.isArray(window.ARTWORKS_DATA) && window.ARTWORKS_DATA.length > 0
+    ? window.ARTWORKS_DATA
+    : null;
+
+  if (location.protocol === "file:" && embeddedData) {
+    return embeddedData;
+  }
+
+  try {
+    const response = await fetch(SETTINGS.artworksUrl);
+    const data = await response.json();
+    window.ARTWORKS_DATA = data;
+    return data;
+  } catch (_) {
+    if (embeddedData) {
+      return embeddedData;
+    }
+    throw _;
+  }
+}
 
 // Menú mobile + año footer
 const toggle = document.querySelector(".nav__toggle");
@@ -27,6 +60,9 @@ function closeNav(){
   document.body.classList.remove("nav-open");
   toggle?.setAttribute("aria-expanded", "false");
   if (backdrop) backdrop.hidden = true;
+  nav.querySelectorAll(".nav__dropdown[open]").forEach((dropdown) => {
+    dropdown.open = false;
+  });
 }
 
 if (toggle && nav) {
@@ -59,27 +95,94 @@ async function loadFeatured() {
   const grid = document.querySelector("#featuredGrid");
   if (!grid) return;
 
-  const res = await fetch("assets/data/artworks.json");
-  const data = await res.json();
+  try {
+    const data = await getArtworksData();
+    if (!Array.isArray(data) || data.length === 0) return;
 
-  const featured = data.slice(0, 6);
-  grid.innerHTML = featured.map(featuredCardHTML).join("");
+    const featured = pickItemsByIds(data, FEATURED_CURATION_IDS);
+    const [spotlight, ...secondary] = featured;
+    if (!spotlight) return;
+
+    grid.innerHTML = `
+      ${featuredSpotlightHTML(spotlight)}
+      <div class="featured-curation__stack">
+        ${secondary.map(featuredCardHTML).join("")}
+      </div>
+    `;
+  } catch (_) {
+    // Si falla la carga, la sección mantiene el layout sin tarjetas.
+  }
+}
+
+function artworkTypeLabel(item) {
+  return item.type === "ceramica" ? "Cerámica" : "Pintura";
+}
+
+function artworkCollection(item) {
+  return typeof item.collection === "string" ? item.collection.trim() : "";
+}
+
+function artworkDescription(item) {
+  const description = (item.description || "").trim();
+  if (!description || /descripci[oó]n pendiente/i.test(description)) {
+    const collection = artworkCollection(item);
+    return collection
+      ? `Parte de la colección ${collection}, una serie de piezas originales donde color, gesto y fauna dialogan entre sí.`
+      : "Obra original creada a mano, disponible para consulta, compra o desarrollo de una comisión relacionada.";
+  }
+
+  return description.length > 175
+    ? `${description.slice(0, 175).trim()}…`
+    : description;
+}
+
+function availabilityLabel(item) {
+  return item.available ? "Disponible" : "Vendida";
+}
+
+function featuredSpotlightHTML(item) {
+  const meta = [item.year, item.medium, item.size].filter(Boolean).join(" • ");
+  const collection = artworkCollection(item);
+
+  return `
+    <a class="featured-spotlight" href="gallery.html?open=${encodeURIComponent(item.id)}">
+      <div class="featured-spotlight__media">
+        <img src="${item.image}" alt="${item.title}" loading="eager" />
+      </div>
+      <div class="featured-spotlight__content">
+        <div class="featured-spotlight__chips">
+          <span class="badge ${item.available ? "badge--available" : "badge--sold"}">${availabilityLabel(item)}</span>
+          <span class="featured-chip">${artworkTypeLabel(item)}</span>
+          ${collection ? `<span class="featured-chip featured-chip--soft">${collection}</span>` : ""}
+        </div>
+        <div class="featured-spotlight__copy">
+          <span class="featured-kicker">Obra protagonista</span>
+          <h3>${item.title}</h3>
+          <p>${artworkDescription(item)}</p>
+        </div>
+        ${meta ? `<p class="featured-spotlight__meta">${meta}</p>` : ""}
+        <span class="featured-spotlight__cta">Ver detalle completo</span>
+      </div>
+    </a>
+  `;
 }
 
 function featuredCardHTML(item) {
-  const meta = `${item.year} • ${item.medium}`;
-  const badge = item.available ? "Available" : "Sold";
-  const badgeClass = item.available ? "badge--available" : "badge--sold";
+  const collection = artworkCollection(item);
+  const meta = [item.year, artworkTypeLabel(item)].filter(Boolean).join(" • ");
 
   return `
-    <a class="tile" href="gallery.html?open=${encodeURIComponent(item.id)}">
-      <div class="tile__top">
-        <span class="badge ${badgeClass}">${badge}</span>
+    <a class="featured-card" href="gallery.html?open=${encodeURIComponent(item.id)}">
+      <div class="featured-card__media">
+        <img class="featured-card__img" src="${item.image}" alt="${item.title}" loading="lazy" />
       </div>
-      <img class="tile__img" src="${item.image}" alt="${item.title}" loading="lazy" />
-      <div class="tile__body">
-        <p class="tile__title">${item.title}</p>
-        <p class="tile__meta">${meta}</p>
+      <div class="featured-card__body">
+        <div class="featured-card__top">
+          <span class="featured-card__meta">${meta}</span>
+          <span class="badge ${item.available ? "badge--available" : "badge--sold"}">${availabilityLabel(item)}</span>
+        </div>
+        <h3 class="featured-card__title">${item.title}</h3>
+        ${collection ? `<p class="featured-card__collection">${collection}</p>` : ""}
       </div>
     </a>
   `;
@@ -94,11 +197,10 @@ async function loadHeroCarousel() {
   if (!track || !prevBtn || !nextBtn || !dotsWrap) return;
 
   try {
-    const res = await fetch("assets/data/artworks.json");
-    const data = await res.json();
+    const data = await getArtworksData();
     if (!Array.isArray(data) || data.length === 0) return;
 
-    const items = data.slice(0, 6);
+    const items = pickItemsByIds(data, HOME_HERO_IDS);
     let current = 0;
     let timer = null;
 
@@ -200,3 +302,4 @@ window.addEventListener("scroll", () => {
 
   lastScroll = currentScroll;
 }, { passive: true }); // Mejora el rendimiento del scroll
+})();
